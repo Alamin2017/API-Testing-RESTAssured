@@ -9,8 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
-
-public class Test_API {
+public class Test_BasicAPI {
     @Test(priority = 1)
     public void test_1() {
         Response response = RestAssured.get("https://reqres.in/api/users?page=2");
@@ -106,31 +105,20 @@ public class Test_API {
         requestParams.put("job","Engineer");
         httpRequest.body(requestParams.toJSONString());
         httpRequest.header("Content-Type","application/json");
-
         Response response=httpRequest.request(Method.POST,"/users");
-
         String responseBody=response.getBody().asString();
         System.out.println("Response Body is:"+responseBody);
         int statusCode=response.getStatusCode();
         System.out.println("Status code is:"+statusCode);
-
-
     }
     @Test(priority = 9)
     public void HeaderTest() {
         RestAssured.baseURI = "https://bookstore.toolsqa.com";
-
         RequestSpecification httpRequest = RestAssured.given();
-
         Response response = httpRequest.request(Method.GET, "/BookStore/v1/Books");
-
         String responseBody = response.getBody().asString();
-
-
         System.out.println("Response Body is:" + responseBody);
-
         Headers all_headers = response.headers();
-
         for (Header header : all_headers) {
             System.out.println(header.getName() + "->>>" + header.getValue());
         }
@@ -139,37 +127,23 @@ public class Test_API {
     public void JsonTest()
     {
             RestAssured.baseURI="https://reqres.in";
-
             RequestSpecification httpRequest=RestAssured.given();
-
             Response response=httpRequest.request(Method.GET,"/api/users?page=2");
-
             JsonPath jsonpath =response.jsonPath();
             System.out.println((int) jsonpath.get("page"));
-
-
     }
     @Test(priority = 11)
     public void AuthenticationTest()
     {
         RestAssured.baseURI="https://postman-echo.com/basic-auth";
-
-
         PreemptiveBasicAuthScheme authscheme=new PreemptiveBasicAuthScheme();
         authscheme.setUserName("postman");
         authscheme.setPassword("password");
-
         authentication=authscheme;
-
         RequestSpecification httpRequest=RestAssured.given();
-
         Response response=httpRequest.request(Method.GET,"/");
-
         String responseBody=response.getBody().asString();
         System.out.println("Response Body is:"+responseBody);
-
-
-
     }
 
 }
