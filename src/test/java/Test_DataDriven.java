@@ -3,10 +3,8 @@ import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.json.simple.JSONObject;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 public class Test_DataDriven {
 
     @Test(dataProvider ="emp_data_provider" )
@@ -24,7 +22,6 @@ public class Test_DataDriven {
         String responseBody=response.getBody().asString();
         System.out.println("Response Body:"+responseBody);
 
-
     }
     @DataProvider(name="emp_data_provider")
     String [][] getEmpData()
@@ -32,5 +29,6 @@ public class Test_DataDriven {
         String emp_data[][]={ {"x123","30231","90"},{"xs123","45678","91"}};
         return(emp_data);
     }
+
 
 }
