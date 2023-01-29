@@ -2,9 +2,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 import io.restassured.http.*;
-
 import java.util.HashMap;
-
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
@@ -45,9 +43,6 @@ public class HTTPRequests {
         String emp_data[][]={ {"x123","teacher"},{"xs123","farmer"}};
         return(emp_data);
     }
-
-
-
 
     @Test(priority = 3,dependsOnMethods = {"createUser"})
     public void updateUser()
